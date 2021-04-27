@@ -1,0 +1,49 @@
+<template>
+    <lightning-card class="slds-align_absolute-center" icon-name="utility:currency" title="Exchange Rates">
+      <template if:true={rates}>   
+      <div class="demo-only demo-only--sizing slds-grid slds-wrap slds-p-horizontal_large">
+     <div class="slds-size_12-of-12">
+         <div class="slds-box  slds-text-align_center ">    
+                 <div class="divComboBoxWrapper slds-grid">
+                     <div class="slds-size_2-of-12 slds-text-align_right">
+                          Current currency:
+                     </div>
+                     <div class="divComboBox slds-size_7-of-12 slds-text-align_left">
+                              <lightning-combobox
+                                     variant="label-hidden"
+                                     class="comboBox"
+                                     name="progress"
+                                     value={rates.BaseCurrency}
+                                     options={options}
+                                     onchange={handleChangeBase} >
+                                 </lightning-combobox>
+                                 <lightning-input  variant="label-hidden" 
+                                      class="comboBox" type="date" 
+                                      name="input1" onchange={handleInputDate}
+                                      placeholder={rates.Date}>
+                                </lightning-input>
+                    </div>
+                    <div class="slds-size_3-of-12 slds-text-align_right">
+                       Interbank Rate
+                   </div>
+                </div>
+         </div>
+     </div>
+     <template for:each={datas} for:item="data">
+       <div class="slds-size_12-of-12" key={data.currency}>
+    <div class="slds-box slds-grid  slds-text-align_center ">
+        <div class="slds-size_2-of-12 slds-text-align_left">{data.currency}</div>
+         <div class="slds-size_7-of-12 slds-text-align_left">{data.decryption}</div>
+        <div class="slds-size_3-of-12 slds-text-align_center">{data.rate}</div>
+    </div>
+  </div>
+     </template>
+  </div>
+  </template>
+  <template if:false={rates}> 
+                There`s no rates for current date! Please update rates in saleforce
+             </template>
+    </lightning-card>        
+</template>
+
+ 

@@ -1,0 +1,22 @@
+
+.divComboBoxWrapper{
+    display:flex;
+    margin: 0;
+}
+.divComboBox{
+    display:flex; 
+    margin:0; 
+    padding:0; 
+    width: 50%;
+}
+.comboBox {
+   margin-right: 5px;
+}
+
+
+
+
+.slds-box{
+    border-left: none;
+    border-right: none;
+}
