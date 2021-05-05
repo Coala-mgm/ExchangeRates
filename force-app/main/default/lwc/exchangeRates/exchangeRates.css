@@ -9,10 +9,9 @@
     padding:0; 
     width: 50%;
 }
-.comboBox {
+.comboBox, .comboBox2 {
    margin-right: 5px;
 }
-
 
 
 

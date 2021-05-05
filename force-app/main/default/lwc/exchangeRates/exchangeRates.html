@@ -5,25 +5,55 @@
      <div class="slds-size_12-of-12">
          <div class="slds-box  slds-text-align_center ">    
                  <div class="divComboBoxWrapper slds-grid">
-                     <div class="slds-size_2-of-12 slds-text-align_right">
-                          Current currency:
-                     </div>
-                     <div class="divComboBox slds-size_7-of-12 slds-text-align_left">
-                              <lightning-combobox
+                     <div  class="slds-size_9-of-12">
+                         <div class="slds-grid slds-m-bottom_xx-small">
+                              <div class="slds-size_3-of-12 slds-text-align_center">
+                               Current currency:
+                              </div>
+                                <div class="divComboBox slds-size_9-of-12 slds-text-align_left">
+                                  <lightning-combobox
                                      variant="label-hidden"
                                      class="comboBox"
                                      name="progress"
                                      value={rates.BaseCurrency}
                                      options={options}
                                      onchange={handleChangeBase} >
-                                 </lightning-combobox>
-                                 <lightning-input  variant="label-hidden" 
+                                    </lightning-combobox>
+                                    <lightning-input  variant="label-hidden" 
                                       class="comboBox" type="date" 
                                       name="input1" onchange={handleInputDate}
                                       placeholder={rates.Date}>
-                                </lightning-input>
-                    </div>
-                    <div class="slds-size_3-of-12 slds-text-align_right">
+                                   </lightning-input>
+                                 </div>
+                         </div>
+                         <div>
+                              <div class="slds-grid">
+                              <div class="slds-size_3-of-12 slds-text-align_center">
+                               Search rate by period:
+                              </div>
+                                <div class="divComboBox slds-size_9-of-12 slds-text-align_left">
+                                    <lightning-input  variant="label-hidden" 
+                                      class="comboBox2" type="text" 
+                                      name="input1" onchange={handleInputstartDate}
+                                      placeholder="start date:"
+                                      >
+                                   </lightning-input>
+                                    <lightning-input  variant="label-hidden" 
+                                      class="comboBox2" type="text" 
+                                      name="input1" onchange={handleInputendDate}
+                                      placeholder="end date:"
+                                     >
+                                   </lightning-input>
+                                 </div>
+                                 <div class="divComboBox slds-size_9-of-12 slds-text-align_left">
+                                   <lightning-button variant="brand" label="Find" onclick={handlePress}></lightning-button>
+                                 </div>
+                         </div>
+                         </div>
+                      
+                     </div>
+                  
+                    <div class="slds-size_3-of-12 slds-text-align_center">
                        Interbank Rate
                    </div>
                 </div>
@@ -31,11 +61,11 @@
      </div>
      <template for:each={datas} for:item="data">
        <div class="slds-size_12-of-12" key={data.currency}>
-    <div class="slds-box slds-grid  slds-text-align_center ">
-        <div class="slds-size_2-of-12 slds-text-align_left">{data.currency}</div>
-         <div class="slds-size_7-of-12 slds-text-align_left">{data.decryption}</div>
-        <div class="slds-size_3-of-12 slds-text-align_center">{data.rate}</div>
-    </div>
+         <div class="slds-box slds-grid  slds-text-align_center ">
+           <div class="slds-size_2-of-12 slds-text-align_left">{data.currency}</div>
+           <div class="slds-size_7-of-12 slds-text-align_left">{data.decryption}</div>
+          <div class="slds-size_3-of-12 slds-text-align_center">{data.rate}</div>
+     </div>
   </div>
      </template>
   </div>
@@ -43,7 +73,28 @@
   <template if:false={rates}> 
                 There`s no rates for current date! Please update rates in saleforce
              </template>
-    </lightning-card>        
+    </lightning-card>
+    <template if:true={showDateRows}>
+      <lightning-card>
+          <template for:each={dates} for:item="data">
+            <div key={data.date}>
+            <div class="  slds-text-align_center ">
+              <h2 >Rate for {data.date}</h2>
+            </div>
+                              <template for:each={data.arrs} for:item="arr">
+                              <div class="slds-size_12-of-12" key={arr.currency}>
+                                   <div class="slds-box slds-grid  slds-text-align_center ">
+                                  <div class="slds-size_2-of-12 slds-text-align_left">{arr.currency}</div>
+                                  <div class="slds-size_7-of-12 slds-text-align_left">{arr.decryption}</div>
+                                  <div class="slds-size_3-of-12 slds-text-align_center">{arr.rate}</div>
+                                   </div>
+                              </div>
+                         </template>                        
+             
+          </div>
+     </template>
+    </lightning-card>    
+    </template>  
 </template>
 
  
